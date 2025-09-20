@@ -22,7 +22,8 @@ VG_NAME=$(lvs --noheadings -o vg_name "$LV_PATH" | xargs)
 echo "Volume Group: $VG_NAME"
 
 # 4. Check VG free space in a format like 2.54g or 512m
-VG_FREE=$(vgs "$VG_NAME" --noheadings -o vg_free | sed 's/[[:space:]]//g')
+# Strip spaces and remove < or > if present
+VG_FREE=$(vgs "$VG_NAME" --noheadings -o vg_free | sed 's/[[:space:]]//g' | sed 's/[<>]//g')
 VG_FREE_NUM=${VG_FREE%?}  # Number part, e.g., 2.54
 VG_FREE_UNIT=${VG_FREE: -1}  # Last char unit, e.g., g or m
 
@@ -68,8 +69,8 @@ else
         fi
     done
 
-    # Re-check free space
-    VG_FREE=$(vgs "$VG_NAME" --noheadings -o vg_free | sed 's/[[:space:]]//g')
+    # Re-check VG free space (strip < > again)
+    VG_FREE=$(vgs "$VG_NAME" --noheadings -o vg_free | sed 's/[[:space:]]//g' | sed 's/[<>]//g')
     VG_FREE_NUM=${VG_FREE%?}
     VG_FREE_UNIT=${VG_FREE: -1}
     case "$VG_FREE_UNIT" in
