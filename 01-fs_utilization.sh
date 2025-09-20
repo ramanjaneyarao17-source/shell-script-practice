@@ -2,4 +2,4 @@
 
 #this is the script to check Filesystem utilization
 
-df -h $1
+echo "total fielsystems on the server $(df -h)"
