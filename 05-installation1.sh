@@ -1,8 +1,8 @@
 #!/bin/bash
 
-UID=$(id -u)
+USERID=$(id -u)
 
-if [ $UID -eq 0 ]; then
+if [ $USERID -eq 0 ]; then
     echo "running script as root"
     dnf install nginx -y
 else
