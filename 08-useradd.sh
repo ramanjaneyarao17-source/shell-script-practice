@@ -13,7 +13,8 @@ id $USER_NAME 2&> /dev/null
 if [ $? -ne 0 ]; then
     id $USER_ID 2&> /dev/null
     if [ $? -ne 0 ]; then
-        echo "user $USER_NAME and $USER_ID not existed"
+        useradd -u $USER_ID $USER_NAME
+        echo "user $USER_NAME with id  $USER_ID are created"
     else
         echo "USer $USER_NAME not existed but $USER_ID already existed"
     fi
