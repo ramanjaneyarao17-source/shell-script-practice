@@ -8,7 +8,7 @@ USER_SHELL=$4
 USER_HOMEDIR=$5
 USER_CMT=$6
 
-id $USER_NAME > /dev/null
+id $USER_NAME 2&> /dev/null
 
 if [ $? -ne 0 ]; then
     echo "user $USER_NAME not existed"
