@@ -10,7 +10,7 @@ USER_CMT=$6
 
 id $USER_NAME > /dev/null
 
-if [ echo $? -ne 0 ]; then
+if [ $? -ne 0 ]; then
     echo "user $USER_NAME not existed"
 else
     echo "user $USER_NAME already existed"
